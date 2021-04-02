@@ -84,7 +84,7 @@ function formLastName() {
     errorLastName.style.display = "block";
     return false;
   } else if (!regexLetters.test(lastName.value)) {
-    errorLastName.innerHTML = "Seul les caractéres alphanumériques sont acceptés, utilisé (-) pour les prénoms composés";
+    errorLastName.innerHTML = "Seul les caractéres alphanumériques sont acceptés, utilisé (-) pour les noms composés";
     errorLastName.style.display = "block";
     return false
   }else {
