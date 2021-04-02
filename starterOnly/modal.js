@@ -12,6 +12,8 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const modalCross = document.querySelector(".close");
 const formIsValid = document.getElementById("formIsValid");
 const btnCloseModalFormIsValid = document.querySelector(".btn__closeModal");
+
+
 /* MODAL FUNCTION */
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -52,6 +54,7 @@ const checkCondition = document.getElementById("checkbox1");
 /* FUNCTION FOR ALL EL FORM */
 function formFirstName() {
   const errorFirstName = document.getElementById("error_first_name");
+  const regexLetters = new RegExp(/^[A-Za-z-]+$/);
   if (!firstName.value) {
     errorFirstName.innerHTML = "Veuillez renseigner votre prénom";
     errorFirstName.style.display = "block";
@@ -60,6 +63,10 @@ function formFirstName() {
     errorFirstName.innerHTML = "Veuillez renseigner 2 caractères au minimumn";
     errorFirstName.style.display = "block";
     return false;
+  } else if (!regexLetters.test(firstName.value)) {
+    errorFirstName.innerHTML = "Seul les caractéres alphanumériques sont acceptés, utilisé (-) pour les prénoms composés";
+    errorFirstName.style.display = "block";
+    return false
   } else {
     errorFirstName.style.display = "none";
     return true;
@@ -67,6 +74,7 @@ function formFirstName() {
 }
 function formLastName() {
   const errorLastName = document.getElementById("error_last_name");
+  const regexLetters = new RegExp(/^[A-Za-z-]+$/);
   if (!lastName.value) {
     errorLastName.innerHTML = "Veuillez renseigner votre nom";
     errorLastName.style.display = "block";
@@ -75,7 +83,11 @@ function formLastName() {
     errorLastName.innerHTML = "Veuillez renseigner 2 caractères au minimumn";
     errorLastName.style.display = "block";
     return false;
-  } else {
+  } else if (!regexLetters.test(lastName.value)) {
+    errorLastName.innerHTML = "Seul les caractéres alphanumériques sont acceptés, utilisé (-) pour les prénoms composés";
+    errorLastName.style.display = "block";
+    return false
+  }else {
     errorLastName.style.display = "none";
     return true;
   }
@@ -87,7 +99,7 @@ function formEmail() {
     errorEmail.innerHTML = "Veuillez renseigner votre email";
     errorEmail.style.display = "block";
     return false;
-  } else if (regexEmail.test(email.value) === false) {
+  } else if (!regexEmail.test(email.value)) {
     errorEmail.innerHTML = "Veuillez renseigner un email valide";
     errorEmail.style.display = "block";
     return false;
@@ -102,7 +114,7 @@ function formBirthDate() {
     errorBirthdate.innerHTML = "Veuillez renseigner votre date d'anniversaire";
     errorBirthdate.style.display = "block";
     return false;
-  } else if (birthdate.type !== 'date') {
+  } else if (birthdate.type !== "date") {
     errorBirthdate.innerHTML = "Veuillez renseigner une date";
     errorBirthdate.style.display = "block";
   } else {
@@ -145,7 +157,7 @@ function formRadioLocation() {
     (radio) => radio.checked === true
   );
   if (result.length > 0) {
-    errorRadioLocation.style.display = "none"
+    errorRadioLocation.style.display = "none";
     return true;
   } else {
     errorRadioLocation.innerHTML = "Veuillez selectionner une ville";
